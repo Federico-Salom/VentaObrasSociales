@@ -125,7 +125,7 @@ body::after {
 main {
   display: flex;
   flex-direction: column;
-  gap: clamp(3rem, 6vw, 4.5rem);
+  gap: clamp(0.75rem, 2vw, 1.5rem);
 }
 .hero__glow {
   display: none;
@@ -365,7 +365,7 @@ main {
   transform: translateY(-3px) scale(1.01);
 }
 .section {
-  padding: clamp(2.3rem, 5vw, 4.2rem) clamp(1.5rem, 5vw, 4.5rem);
+  padding: clamp(0.8rem, 2vw, 1.5rem) clamp(1.5rem, 5vw, 4.5rem);
   position: relative;
   background: transparent;
 }
@@ -376,7 +376,7 @@ main {
   background: transparent;
 }
 .section--cta {
-  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4.5rem) clamp(1.5rem, 3.5vw, 2.5rem);
+  padding: clamp(0.8rem, 2vw, 1.5rem) clamp(1.5rem, 5vw, 4.5rem);
 }
 .cta__panel {
   background: var(--bg-panel);
@@ -718,8 +718,8 @@ main {
   animation-delay: 1.35s;
 }
 .footer {
-  padding: 0.9rem clamp(1.5rem, 5vw, 4.5rem);
-  min-height: 3rem;
+  padding: 1.15rem clamp(1.5rem, 5vw, 4.5rem);
+  min-height: 3.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
