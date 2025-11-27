@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, type ChangeEvent, type FormEvent } from "react"
+﻿import { useState, useEffect, useRef, type ChangeEvent, type FormEvent } from "react"
 import { observeRevealElements } from "./revealObserver"
 
 type ObraSocial = {
@@ -90,6 +90,8 @@ const heroStats = [
   { valor: "0", etiqueta: "costos por tramitar" },
 ]
 
+const TICKER_BASE_SPEED = 38
+
 const metricasConfianza: ConfianzaMetric[] = [
   { valor: "12 años", etiqueta: "Gestionando aportes", detalle: "Experiencia en payroll y derivaciones para PyMEs" },
   { valor: "98%", etiqueta: "Altas aprobadas", detalle: "Documentacion validada por las obras sociales" },
@@ -145,6 +147,13 @@ const ASESOR_NOMBRE = "Lucas Dinapoli"
 export default function App() {
   const [formData, setFormData] = useState({ dni: "", preferencia: "", localidad: "", mensaje: "" })
   const [formEstado, setFormEstado] = useState<"idle" | "sent" | "error">("idle")
+  const tickerRef = useRef<HTMLUListElement | null>(null)
+  const tickerSpeedRef = useRef(TICKER_BASE_SPEED)
+  const tickerTargetSpeedRef = useRef(TICKER_BASE_SPEED)
+  const tickerOffsetRef = useRef(0)
+  const tickerLastTimeRef = useRef<number | null>(null)
+  const tickerDraggingRef = useRef(false)
+  const tickerDragLastXRef = useRef(0)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -153,6 +162,55 @@ export default function App() {
       window.history.replaceState(null, "", url)
     }
     observeRevealElements()
+  }, [])
+
+  useEffect(() => {
+    let frame: number
+    const step = (time: number) => {
+      const last = tickerLastTimeRef.current
+      tickerLastTimeRef.current = time
+      if (last !== null) {
+        const dt = Math.min((time - last) / 1000, 0.05)
+        const speed = tickerSpeedRef.current + (tickerTargetSpeedRef.current - tickerSpeedRef.current) * Math.min(1, dt * 3)
+        tickerSpeedRef.current = speed
+        const list = tickerRef.current
+        const wrapWidth = list?.scrollWidth ? list.scrollWidth / 2 : 0
+        if (list && wrapWidth > 0) {
+          tickerOffsetRef.current = (tickerOffsetRef.current + speed * dt) % wrapWidth
+          list.style.transform = `translateX(-${tickerOffsetRef.current}px)`
+        }
+      }
+      frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [])
+
+  useEffect(() => {
+    const handlePointerMove = (event: PointerEvent) => {
+      if (!tickerDraggingRef.current || !tickerRef.current) return
+      const list = tickerRef.current
+      const wrapWidth = list.scrollWidth ? list.scrollWidth / 2 : 0
+      if (!wrapWidth) return
+      const delta = event.clientX - tickerDragLastXRef.current
+      tickerDragLastXRef.current = event.clientX
+      const nextOffset = tickerOffsetRef.current - delta
+      tickerOffsetRef.current = ((nextOffset % wrapWidth) + wrapWidth) % wrapWidth
+      list.style.transform = `translateX(-${tickerOffsetRef.current}px)`
+    }
+
+    const handlePointerUp = () => {
+      if (!tickerDraggingRef.current) return
+      tickerDraggingRef.current = false
+      tickerTargetSpeedRef.current = TICKER_BASE_SPEED
+    }
+
+    window.addEventListener("pointermove", handlePointerMove)
+    window.addEventListener("pointerup", handlePointerUp)
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove)
+      window.removeEventListener("pointerup", handlePointerUp)
+    }
   }, [])
 
   const handleChange = (field: keyof typeof formData) =>
@@ -201,13 +259,42 @@ export default function App() {
             <p className="hero__subcopy">
               Vas a tener tu aplicacion para autogestionarte: turnos, recetas, autorizaciones, teleconsultas y citas programadas quedan en un mismo panel para que no dependas de terceros.
             </p>
-            <ul className="hero__highlights">
-              {heroHighlights.map((texto) => (
-                <li className="hero__highlight" data-reveal key={texto}>
-                  {texto}
-                </li>
-              ))}
-            </ul>
+            <div className="hero__highlights-wrap">
+              <ul
+                className="hero__highlights"
+                aria-label="Beneficios principales"
+                ref={tickerRef}
+                onMouseEnter={() => {
+                  if (!tickerDraggingRef.current) tickerTargetSpeedRef.current = 0
+                }}
+                onMouseLeave={() => {
+                  if (!tickerDraggingRef.current) tickerTargetSpeedRef.current = TICKER_BASE_SPEED
+                }}
+                onPointerDown={(event) => {
+                  if (!tickerRef.current) return
+                  tickerDraggingRef.current = true
+                  tickerDragLastXRef.current = event.clientX
+                  tickerTargetSpeedRef.current = 0
+                  tickerSpeedRef.current = 0
+                  tickerRef.current.setPointerCapture(event.pointerId)
+                }}
+                onPointerUp={(event) => {
+                  tickerDraggingRef.current = false
+                  tickerTargetSpeedRef.current = TICKER_BASE_SPEED
+                  tickerRef.current?.releasePointerCapture(event.pointerId)
+                }}
+                onPointerLeave={() => {
+                  if (tickerDraggingRef.current) return
+                  tickerTargetSpeedRef.current = TICKER_BASE_SPEED
+                }}
+              >
+                {[...heroHighlights, ...heroHighlights].map((texto, index) => (
+                  <li className="hero__highlight" data-reveal key={`${texto}-${index}`}>
+                    {texto}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="hero__actions">
               <a className="btn btn--primary" href="#contacto">
                 Agendar llamada
