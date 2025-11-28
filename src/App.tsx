@@ -145,8 +145,9 @@ const CONTACT_EMAIL = "ldinapoli.gonzalez.colmena@gmail.com"
 const ASESOR_NOMBRE = "Lucas Dinapoli"
 
 export default function App() {
-  const [formData, setFormData] = useState({ dni: "", preferencia: "", localidad: "", mensaje: "" })
+  const [formData, setFormData] = useState({ dni: "", telefono: "", preferencia: "", localidad: "", mensaje: "" })
   const [formEstado, setFormEstado] = useState<"idle" | "sent" | "error">("idle")
+  const [isNavOpen, setIsNavOpen] = useState(false)
   const tickerRef = useRef<HTMLUListElement | null>(null)
   const tickerSpeedRef = useRef(TICKER_BASE_SPEED)
   const tickerTargetSpeedRef = useRef(TICKER_BASE_SPEED)
@@ -221,15 +222,25 @@ export default function App() {
 
   const handleDiagnostico = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!formData.dni || !formData.preferencia || !formData.localidad) {
+    if (!formData.dni || !formData.telefono || !formData.preferencia || !formData.localidad) {
       setFormEstado("error")
       return
     }
 
     const subject = encodeURIComponent("Nueva solicitud de diagnostico express")
-    const cuerpo = `DNI/CUIT: ${formData.dni}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
+    const cuerpo = `DNI/CUIT: ${formData.dni}\nTelefono: ${formData.telefono}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(cuerpo)}`
     setFormEstado("sent")
+  }
+
+  const handleNavNavigate = (value: string) => {
+    if (!value) return
+    setIsNavOpen(false)
+    if (value.startsWith("#")) {
+      window.location.hash = value
+    } else {
+      window.location.href = value
+    }
   }
 
   return (
@@ -247,6 +258,33 @@ export default function App() {
             <a className="btn btn--ghost" href="#contacto">
               Hablar con el asesor
             </a>
+            <button
+              type="button"
+              className={`nav__burger ${isNavOpen ? "is-open" : ""}`}
+              aria-label="Abrir menú de navegación"
+              onClick={() => setIsNavOpen((prev) => !prev)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+            <div className={`nav__mobile ${isNavOpen ? "is-open" : ""}`} role="menu">
+              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#obras")}>
+                Obras
+              </button>
+              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#proceso")}>
+                Proceso
+              </button>
+              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#casos")}>
+                Casos
+              </button>
+              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#faq")}>
+                Preguntas
+              </button>
+              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#contacto")}>
+                Contacto
+              </button>
+            </div>
           </div>
         </nav>
 
@@ -295,30 +333,12 @@ export default function App() {
                 ))}
               </ul>
             </div>
-            <div className="hero__actions">
-              <a className="btn btn--primary" href="#contacto">
-                Agendar llamada
-              </a>
-              <a className="btn btn--secondary" href="#obras">
-                Comparar Flex vs ViaSano
-              </a>
-            </div>
-            <div className="hero__stats-row">
-              <ul className="hero__stats">
-                {heroStats.map((stat) => (
-                  <li key={stat.etiqueta}>
-                    <strong>{stat.valor}</strong>
-                    <span>{stat.etiqueta}</span>
-                  </li>
-                ))}
-              </ul>
-              <span className="badge badge--floating">Asesoria personalizada para trabajadores en blanco</span>
-            </div>
-          </div>
+            <span className="badge badge--floating">Asesoria personalizada para trabajadores en blanco</span>
+        </div>
 
-          <div className="hero__card">
-            <div className="hero__card-head">
-              <h2>Diagnostico express</h2>
+        <div className="hero__card">
+          <div className="hero__card-head">
+            <h2>Diagnostico express</h2>
               <p>Enviame tus datos basicos y te devuelvo un plan de accion para redirigir tus aportes.</p>
             </div>
             <form className="simulador" onSubmit={handleDiagnostico}>
@@ -329,6 +349,16 @@ export default function App() {
                   placeholder="Ej: 30-12345678-9"
                   value={formData.dni}
                   onChange={handleChange("dni")}
+                  required
+                />
+              </label>
+              <label>
+                Telefono de contacto
+                <input
+                  type="tel"
+                  placeholder="Ej: 11 5555 5555"
+                  value={formData.telefono}
+                  onChange={handleChange("telefono")}
                   required
                 />
               </label>
@@ -371,15 +401,34 @@ export default function App() {
                   Abri tu cliente de correo para enviar el mensaje con tus datos.
                 </span>
               )}
-              {formEstado === "error" && (
-                <span className="simulador__status simulador__status--error" role="status">
-                  Completa los campos obligatorios antes de enviar.
-                </span>
-              )}
-            </form>
-          </div>
+            {formEstado === "error" && (
+              <span className="simulador__status simulador__status--error" role="status">
+                Completa los campos obligatorios antes de enviar.
+              </span>
+            )}
+          </form>
         </div>
-      </header>
+      </div>
+
+      <div className="hero__cta-row">
+        <ul className="hero__stats">
+          {heroStats.map((stat) => (
+            <li key={stat.etiqueta}>
+              <strong>{stat.valor}</strong>
+              <span>{stat.etiqueta}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="hero__actions hero__actions--right">
+          <a className="btn btn--secondary" href="#obras">
+            Comparar Flex vs ViaSano
+          </a>
+          <a className="btn btn--primary" href="#contacto">
+            Agendar llamada
+          </a>
+        </div>
+      </div>
+    </header>
 
       <main>
         <section className="section section--confidence">
