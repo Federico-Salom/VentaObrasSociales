@@ -118,7 +118,7 @@ body::after {
 
 .hero {
   position: relative;
-  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1.5rem, 5vw, 4.5rem) clamp(3rem, 6vw, 4.5rem);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4.5rem);
   background: transparent;
   color: #f5f7ff;
   overflow: visible;
@@ -134,60 +134,79 @@ main {
 .hero__nav {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.85rem;
+  justify-content: space-evenly;
+  flex-direction: row;
+  gap: 1rem;
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   flex-wrap: wrap;
-  text-align: center;
+  text-align: left;
+  padding-inline: 0;
 }
 .logo {
-  font-weight: 800;
-  font-size: clamp(1.4rem, 2.8vw, 1.7rem);
-  letter-spacing: 0.04em;
-  text-align: center;
-  width: 100%;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: auto;
+  height: clamp(3rem, 5.5vw, 4.3rem);
+  color: #f5f7ff;
+  overflow: visible;
+  vertical-align: top;
 }
 .nav__cta {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-start;
+  width: auto;
+  flex: 0 0 auto;
 }
 .nav__cta .btn--ghost {
-  padding: 0.65rem 1.35rem;
-  font-size: 1.05rem;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  color: #f5fbff;
 }
 .nav__cta .btn--ghost:hover {
   transform: none;
-  background: rgba(12, 43, 74, 0.9);
-  border-color: rgba(148, 224, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 0 18px rgba(148, 224, 255, 0.28),
-    0 10px 25px #02061766;
+    0 0 16px rgba(255, 255, 255, 0.35),
+    0 12px 30px rgba(0, 0, 0, 0.45);
+  color: #fdfdfd;
 }
 .nav__links {
   display: flex;
-  gap: 1.25rem;
+  align-items: center;
+  gap: 1.5rem;
   justify-content: center;
-  font-size: 0.95rem;
-  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  padding: 0.55rem 1.1rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
 }
 .nav__links a {
-  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
   position: relative;
-  padding: 0.25rem 0.4rem;
+  padding: 0.35rem 0.6rem;
   color: #f0f7ff;
-  transition: color 0.8s ease;
+  border-radius: 10px;
+  transition:
+    color 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease;
 }
 .nav__links a:hover {
-  color: #7dd3fc;
+  color: #f5f7ff;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(255, 255, 255, 0.22),
+    0 10px 24px rgba(0, 0, 0, 0.35);
 }
 .nav__burger {
   display: none;
@@ -275,7 +294,7 @@ main {
   grid-auto-rows: 1fr;
   position: relative;
   z-index: 2;
-  margin-top: 2.5rem;
+  margin-top: 0;
 }
 .hero__grid > * {
   min-width: 0;
@@ -283,26 +302,28 @@ main {
 .hero__copy {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 1rem;
   height: 100%;
+  flex: 1 1 0;
+  align-self: stretch;
 }
 .hero__copy h1 {
-  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-size: clamp(2rem, 3.8vw, 2.5rem);
   line-height: 1.1;
   margin-bottom: 1rem;
-  margin-top: 0;
+  margin-top: 0.4rem;
 }
 .hero__copy p {
   max-width: 540px;
   color: #cadcf5;
-  font-size: clamp(1.05rem, 2.1vw, 1.2rem);
+  font-size: clamp(1.35rem, 2.6vw, 1.55rem);
   line-height: 1.7;
 }
 .hero__subcopy {
   margin-top: 0.75rem;
   color: #a7c7e9;
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.55rem);
   line-height: 1.7;
 }
 .hero__highlights-wrap {
@@ -455,6 +476,7 @@ main {
   align-self: stretch;
   width: 100%;
   max-width: 100%;
+  margin-top: 0.6rem;
 }
 .hero__card:after {
   content: "";

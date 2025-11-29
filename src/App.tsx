@@ -247,7 +247,19 @@ export default function App() {
     <div className="page">
       <header className="hero">
         <nav className="hero__nav" aria-label="Navegacion principal">
-          <span className="logo">Aportes Flex & ViaSano</span>
+          <svg className="logo" viewBox="0 0 735 80" role="img" aria-label="Aportes Flex y ViaSano" preserveAspectRatio="xMinYMin meet">
+            <text
+              x="0"
+              y="64"
+              fontFamily="Inter, 'Segoe UI', system-ui, -apple-system, sans-serif"
+              fontWeight="800"
+              fontSize="64"
+              fill="currentColor"
+              dominantBaseline="alphabetic"
+            >
+              Aportes Flex &amp; ViaSano
+            </text>
+          </svg>
           <div className="nav__cta">
             <div className="nav__links">
               <a href="#obras">Obras</a>
