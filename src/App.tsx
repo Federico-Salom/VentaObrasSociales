@@ -1,4 +1,4 @@
-Ôªøimport { useState, useEffect, useRef, type ChangeEvent, type FormEvent } from "react"
+import { useState, useEffect, useRef, type ChangeEvent, type FormEvent } from "react"
 import { observeRevealElements } from "./revealObserver"
 
 type ObraSocial = {
@@ -93,7 +93,7 @@ const heroStats = [
 const TICKER_BASE_SPEED = 38
 
 const metricasConfianza: ConfianzaMetric[] = [
-  { valor: "12 a√±os", etiqueta: "Gestionando aportes", detalle: "Experiencia en payroll y derivaciones para PyMEs" },
+  { valor: "12 aÒos", etiqueta: "Gestionando aportes", detalle: "Experiencia en payroll y derivaciones para PyMEs" },
   { valor: "98%", etiqueta: "Altas aprobadas", detalle: "Documentacion validada por las obras sociales" },
   { valor: "RNOS vigente", etiqueta: "Respaldado", detalle: "Opero con matriculas actualizadas ante SSSalud" },
 ]
@@ -228,7 +228,7 @@ export default function App() {
     }
 
     const subject = encodeURIComponent("Nueva solicitud de diagnostico express")
-    const cuerpo = `DNI/CUIT: ${formData.dni}\nTelefono: ${formData.telefono}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
+    const cuerpo = `DNI/CUIL${formData.dni}\nTelefono: ${formData.telefono}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(cuerpo)}`
     setFormEstado("sent")
   }
@@ -247,33 +247,11 @@ export default function App() {
     <div className="page">
       <header className="hero">
         <nav className="hero__nav" aria-label="Navegacion principal">
-          <svg className="logo" viewBox="0 0 735 80" role="img" aria-label="Aportes Flex y ViaSano" preserveAspectRatio="xMinYMin meet">
-            <text
-              x="0"
-              y="64"
-              fontFamily="Inter, 'Segoe UI', system-ui, -apple-system, sans-serif"
-              fontWeight="800"
-              fontSize="64"
-              fill="currentColor"
-              dominantBaseline="alphabetic"
-            >
-              Aportes Flex &amp; ViaSano
-            </text>
-          </svg>
           <div className="nav__cta">
-            <div className="nav__links">
-              <a href="#obras">Obras</a>
-              <a href="#proceso">Proceso</a>
-              <a href="#casos">Casos</a>
-              <a href="#faq">Preguntas</a>
-            </div>
-            <a className="btn btn--ghost" href="#contacto">
-              Hablar con el asesor
-            </a>
             <button
               type="button"
               className={`nav__burger ${isNavOpen ? "is-open" : ""}`}
-              aria-label="Abrir men√∫ de navegaci√≥n"
+              aria-label="Abrir men˙ de navegaciÛn"
               onClick={() => setIsNavOpen((prev) => !prev)}
             >
               <span />
@@ -281,9 +259,6 @@ export default function App() {
               <span />
             </button>
             <div className={`nav__mobile ${isNavOpen ? "is-open" : ""}`} role="menu">
-              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#obras")}>
-                Obras
-              </button>
               <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#proceso")}>
                 Proceso
               </button>
@@ -302,9 +277,17 @@ export default function App() {
 
         <div className="hero__grid">
           <div className="hero__copy">
+            <div className="hero__title-row">
+              <h2 className="hero__title-text">Aportes Flex &amp; ViaSano</h2>
+              <div className="nav__links nav__links--hero">
+                <a href="#proceso">Proceso</a>
+                <a href="#casos">Casos</a>
+                <a href="#faq">Preguntas</a>
+              </div>
+            </div>
             <h1>Direcciona tus aportes laborales a Flex o ViaSano sin perder beneficios</h1>
             <p>
-              Soy {ASESOR_NOMBRE}, el nexo comercial de ambas obras sociales. Te acompa√±o paso a paso para que los aportes que ya figuran en tus recibos de sueldo se usen a tu favor, sin pagar doble ni pelearte con administraci√≥n.
+              Soy {ASESOR_NOMBRE}, el nexo comercial de ambas obras sociales. Te acompaÒo paso a paso para que los aportes que ya figuran en tus recibos de sueldo se usen a tu favor, sin pagar doble ni pelearte con administraciÛn.
             </p>
             <p className="hero__subcopy">
               Vas a tener tu aplicacion para autogestionarte: turnos, recetas, autorizaciones, teleconsultas y citas programadas quedan en un mismo panel para que no dependas de terceros.
@@ -346,101 +329,105 @@ export default function App() {
               </ul>
             </div>
             <span className="badge badge--floating">Asesoria personalizada para trabajadores en blanco</span>
-        </div>
-
-        <div className="hero__card">
-          <div className="hero__card-head">
-            <h2>Diagnostico express</h2>
-              <p>Enviame tus datos basicos y te devuelvo un plan de accion para redirigir tus aportes.</p>
+            <div className="hero__cta-row hero__cta-row--compact">
+              <ul className="hero__stats">
+                {heroStats.map((stat) => (
+                  <li key={stat.etiqueta}>
+                    <strong>{stat.valor}</strong>
+                    <span>{stat.etiqueta}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="hero__actions hero__actions--right">
+                <a className="btn btn--secondary" href="#obras">
+                  Comparar Flex vs ViaSano
+                </a>
+                <a className="btn btn--primary" href="#contacto">
+                  Agendar llamada
+                </a>
+              </div>
             </div>
-            <form className="simulador" onSubmit={handleDiagnostico}>
-              <label>
-                Numero de DNI/CUIT
-                <input
-                  type="text"
-                  placeholder="Ej: 30-12345678-9"
-                  value={formData.dni}
-                  onChange={handleChange("dni")}
-                  required
-                />
-              </label>
-              <label>
-                Telefono de contacto
-                <input
-                  type="tel"
-                  placeholder="Ej: 11 5555 5555"
-                  value={formData.telefono}
-                  onChange={handleChange("telefono")}
-                  required
-                />
-              </label>
-              <label>
-                Obra social preferida
-                <select value={formData.preferencia} onChange={handleChange("preferencia")} required>
-                  <option value="" disabled>
-                    Seleccionar
-                  </option>
-                  <option>Quiero Flex</option>
-                  <option>Quiero ViaSano</option>
-                  <option>Necesito que me recomiendes</option>
-                </select>
-              </label>
-              <label>
-                Localidad donde residis
-                <input
-                  type="text"
-                  placeholder="Ej: Palermo, CABA"
-                  value={formData.localidad}
-                  onChange={handleChange("localidad")}
-                  required
-                />
-              </label>
-              <label>
-                Mensaje
-                <textarea
-                  rows={3}
-                  placeholder="Contame si sumas familiares o si tenes otra cobertura"
-                  value={formData.mensaje}
-                  onChange={handleChange("mensaje")}
-                />
-              </label>
-              <button className="btn btn--primary" type="submit">
-                Enviar mis datos
-              </button>
-              <span className="simulador__disclaimer">Respondo por WhatsApp o correo en menos de un dia habil.</span>
-              {formEstado === "sent" && (
-                <span className="simulador__status" role="status">
-                  Abri tu cliente de correo para enviar el mensaje con tus datos.
-                </span>
-              )}
-            {formEstado === "error" && (
-              <span className="simulador__status simulador__status--error" role="status">
-                Completa los campos obligatorios antes de enviar.
-              </span>
-            )}
-          </form>
-        </div>
-      </div>
+          </div>
 
-      <div className="hero__cta-row">
-        <ul className="hero__stats">
-          {heroStats.map((stat) => (
-            <li key={stat.etiqueta}>
-              <strong>{stat.valor}</strong>
-              <span>{stat.etiqueta}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="hero__actions hero__actions--right">
-          <a className="btn btn--secondary" href="#obras">
-            Comparar Flex vs ViaSano
-          </a>
-          <a className="btn btn--primary" href="#contacto">
-            Agendar llamada
-          </a>
+          <div className="hero__form-column">
+            <div className="hero__card">
+              <div className="hero__card-head">
+                <h2>Diagnostico express</h2>
+                <a className="btn btn--secondary hero__card-cta" href="https://wa.me/5491171397320" target="_blank" rel="noreferrer">
+                  Hablar con el asesor
+                </a>
+                <p className="hero__card-subtitle">Enviame tus datos basicos y te devuelvo un plan de accion para redirigir tus aportes.</p>
+              </div>
+              <form className="simulador" onSubmit={handleDiagnostico}>
+                <label>
+                  Numero de DNI/CUIL
+                  <input
+                    type="text"
+                    placeholder="Ej: 30-12345678-9"
+                    value={formData.dni}
+                    onChange={handleChange("dni")}
+                    required
+                  />
+                </label>
+                <label>
+                  Telefono de contacto
+                  <input
+                    type="tel"
+                    placeholder="Ej: 11 5555 5555"
+                    value={formData.telefono}
+                    onChange={handleChange("telefono")}
+                    required
+                  />
+                </label>
+                <label>
+                  Obra social preferida
+                  <select value={formData.preferencia} onChange={handleChange("preferencia")} required>
+                    <option value="" disabled>
+                      Seleccionar
+                    </option>
+                    <option>Quiero Flex</option>
+                    <option>Quiero ViaSano</option>
+                    <option>Necesito que me recomiendes</option>
+                  </select>
+                </label>
+                <label>
+                  Localidad donde residis
+                  <input
+                    type="text"
+                    placeholder="Ej: Palermo, CABA"
+                    value={formData.localidad}
+                    onChange={handleChange("localidad")}
+                    required
+                  />
+                </label>
+                <label>
+                  Mensaje
+                  <textarea
+                    rows={3}
+                    placeholder="Contame si sumas familiares o si tenes otra cobertura"
+                    value={formData.mensaje}
+                    onChange={handleChange("mensaje")}
+                  />
+                </label>
+                <button className="btn btn--primary" type="submit">
+                  Enviar mis datos
+                </button>
+                <span className="simulador__disclaimer">Respondo por WhatsApp o correo en menos de un dia habil.</span>
+                {formEstado === "sent" && (
+                  <span className="simulador__status" role="status">
+                    Abri tu cliente de correo para enviar el mensaje con tus datos.
+                  </span>
+                )}
+                {formEstado === "error" && (
+                  <span className="simulador__status simulador__status--error" role="status">
+                    Completa los campos obligatorios antes de enviar.
+                  </span>
+                )}
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
       <main>
         <section className="section section--confidence">
@@ -491,7 +478,7 @@ export default function App() {
 
         <section id="proceso" className="section section--alt">
           <div className="section__header">
-            <p className="badge badge--soft">Metodologia</p>
+            <p className="badge badge--soft">Proceso</p>
             <h2>Asi aprovechas tus aportes sin pelearte con recursos humanos</h2>
           </div>
           <div className="pasos__grid">
@@ -512,7 +499,7 @@ export default function App() {
           <div className="testimonios">
             {testimonios.map((testimonio, index) => (
               <article className={`testimonio-card reveal delay-${index}`} data-reveal key={testimonio.nombre}>
-                <p className="testimonio-card__mensaje">‚Äú{testimonio.mensaje}‚Äù</p>
+                <p className="testimonio-card__mensaje">ì{testimonio.mensaje}î</p>
                 <div className="testimonio-card__footer">
                   <div>
                     <strong>{testimonio.nombre}</strong>
