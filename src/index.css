@@ -808,6 +808,15 @@ main {
 .simulador__status--error {
   color: #fecdd3;
 }
+.field-error {
+  color: #fca5a5;
+  font-size: 0.85rem;
+  margin-top: -0.2rem;
+}
+.input-error {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.35);
+}
 
 .btn {
   border: none;

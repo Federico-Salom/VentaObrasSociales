@@ -84,7 +84,7 @@ const heroHighlights = [
   "Descuento de hasta el 100 % en farmacias adheridas",
 ]
 
-const heroStats = ["+480 altas activas en 2024", "-24 h de respuesta promedio", "0 costos por el trámite"]
+const heroStats = ["+480 altas activas en 2025", "-24 h de respuesta promedio", "0 costos por el trámite"]
 
 const TICKER_BASE_SPEED = 38
 
@@ -137,12 +137,16 @@ const faqs: FAQ[] = [
   },
 ]
 
-const CONTACT_EMAIL = "ldinapoli.gonzalez.colmena@gmail.com"
+const CONTACT_EMAIL = "federicosalom@proton.me"
 const ASESOR_NOMBRE = "Lucas Dinapoli"
+const API_LEAD_URL = (import.meta as any).env?.VITE_API_LEAD_URL || "/api/lead"
 
 export default function App() {
   const [formData, setFormData] = useState({ dni: "", telefono: "", preferencia: "", localidad: "", mensaje: "" })
   const [formEstado, setFormEstado] = useState<"idle" | "sent" | "error">("idle")
+  const [formEnviando, setFormEnviando] = useState(false)
+  const [formMensajeStatus, setFormMensajeStatus] = useState("")
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
   const [isNavOpen, setIsNavOpen] = useState(false)
   const tickerRef = useRef<HTMLUListElement | null>(null)
   const tickerSpeedRef = useRef(TICKER_BASE_SPEED)
@@ -214,19 +218,56 @@ export default function App() {
     (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
       setFormData((prev) => ({ ...prev, [field]: event.target.value }))
       if (formEstado !== "idle") setFormEstado("idle")
+      if (formMensajeStatus) setFormMensajeStatus("")
+      if (formErrors[field]) {
+        const next = { ...formErrors }
+        delete next[field]
+        setFormErrors(next)
+      }
     }
 
-  const handleDiagnostico = (event: FormEvent<HTMLFormElement>) => {
+  const validarFormulario = () => {
+    const nextErrors: Record<string, string> = {}
+    if (!formData.dni || formData.dni.trim().length < 6) nextErrors.dni = "Ingresá tu DNI/CUIL."
+    if (!formData.telefono || formData.telefono.trim().length < 6) nextErrors.telefono = "Ingresá un teléfono de contacto."
+    if (!formData.preferencia) nextErrors.preferencia = "Elegí una opción."
+    if (!formData.localidad || formData.localidad.trim().length < 3) nextErrors.localidad = "Ingresá tu localidad."
+    if (!formData.mensaje || formData.mensaje.trim().length < 10) nextErrors.mensaje = "Escribí al menos 10 caracteres."
+    setFormErrors(nextErrors)
+    return Object.keys(nextErrors).length === 0
+  }
+
+  const handleDiagnostico = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!formData.dni || !formData.telefono || !formData.preferencia || !formData.localidad) {
+    const esValido = validarFormulario()
+    if (!esValido) {
       setFormEstado("error")
+      setFormMensajeStatus("Revisá los campos marcados en rojo.")
       return
     }
 
-    const subject = encodeURIComponent("Nueva solicitud de diagnostico express")
-    const cuerpo = `DNI/CUIL ${formData.dni}\nTelefono: ${formData.telefono}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(cuerpo)}`
-    setFormEstado("sent")
+    setFormEnviando(true)
+    setFormMensajeStatus("")
+    try {
+      const resp = await fetch(API_LEAD_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          destino: CONTACT_EMAIL,
+          asesor: ASESOR_NOMBRE,
+        }),
+      })
+      if (!resp.ok) throw new Error(`Error API: ${resp.status}`)
+      setFormEstado("sent")
+      setFormMensajeStatus("Recibimos tus datos. Te contactamos en breve.")
+    } catch (error) {
+      console.error(error)
+      setFormEstado("error")
+      setFormMensajeStatus("No se pudo enviar automáticamente. Volvé a intentar en unos minutos.")
+    } finally {
+      setFormEnviando(false)
+    }
   }
 
   const handleNavNavigate = (value: string) => {
@@ -305,9 +346,9 @@ export default function App() {
                   tickerRef.current.setPointerCapture(event.pointerId)
                 }}
                 onPointerUp={(event) => {
-                tickerDraggingRef.current = false
-                tickerTargetSpeedRef.current = TICKER_BASE_SPEED
-                tickerRef.current?.releasePointerCapture(event.pointerId)
+                  tickerDraggingRef.current = false
+                  tickerTargetSpeedRef.current = TICKER_BASE_SPEED
+                  tickerRef.current?.releasePointerCapture(event.pointerId)
                 }}
                 onPointerLeave={() => {
                   if (tickerDraggingRef.current) return
@@ -346,36 +387,42 @@ export default function App() {
               <div className="hero__card-head">
                 <div className="hero__card-row">
                   <h2>Diagnóstico express</h2>
-                  <a className="btn btn--secondary hero__card-cta" href="https://wa.me/5491171397320" target="_blank" rel="noreferrer">
-                    Hablar con el asesor
-                  </a>
+                <a className="btn btn--secondary hero__card-cta" href="https://wa.me/5491171397320" target="_blank" rel="noreferrer">
+                  Hablar con el asesor
+                </a>
                 </div>
                 <p className="hero__card-subtitle">Enviame tus datos básicos y te devuelvo un plan de acción para redirigir tus aportes.</p>
               </div>
-              <form className="simulador" onSubmit={handleDiagnostico}>
+              <form className="simulador" onSubmit={handleDiagnostico} noValidate>
                 <label>
                   Número de DNI/CUIL
                   <input
                     type="text"
+                    className={formErrors.dni ? "input-error" : undefined}
                     placeholder="Ej: 30-12345678-9"
                     value={formData.dni}
                     onChange={handleChange("dni")}
-                    required
                   />
                 </label>
+                {formErrors.dni && <span className="field-error">{formErrors.dni}</span>}
                 <label>
                   Teléfono de contacto
                   <input
                     type="tel"
+                    className={formErrors.telefono ? "input-error" : undefined}
                     placeholder="Ej: 11 5555 5555"
                     value={formData.telefono}
                     onChange={handleChange("telefono")}
-                    required
                   />
                 </label>
+                {formErrors.telefono && <span className="field-error">{formErrors.telefono}</span>}
                 <label>
                   Obra social preferida
-                  <select value={formData.preferencia} onChange={handleChange("preferencia")} required>
+                  <select
+                    className={formErrors.preferencia ? "input-error" : undefined}
+                    value={formData.preferencia}
+                    onChange={handleChange("preferencia")}
+                  >
                     <option value="" disabled>
                       Seleccionar
                     </option>
@@ -384,37 +431,42 @@ export default function App() {
                     <option>Necesito que me recomiedndes</option>
                   </select>
                 </label>
+                {formErrors.preferencia && <span className="field-error">{formErrors.preferencia}</span>}
                 <label>
                   Localidad donde residís
                   <input
+                    className={formErrors.localidad ? "input-error" : undefined}
                     type="text"
                     placeholder="Ej: Palermo, CABA"
                     value={formData.localidad}
                     onChange={handleChange("localidad")}
-                    required
                   />
                 </label>
+                {formErrors.localidad && <span className="field-error">{formErrors.localidad}</span>}
                 <label>
                   Mensaje
                   <textarea
                     rows={3}
+                    className={formErrors.mensaje ? "input-error" : undefined}
                     placeholder="Contame si tenés familiares o si tenés otra cobertura"
                     value={formData.mensaje}
                     onChange={handleChange("mensaje")}
+                    minLength={10}
                   />
                 </label>
+                {formErrors.mensaje && <span className="field-error">{formErrors.mensaje}</span>}
                 <button className="btn btn--primary" type="submit">
                   Enviar mis datos
                 </button>
                 <span className="simulador__disclaimer">Respondo por WhatsApp o correo en menos de un día hábil.</span>
-                {formEstado === "sent" && (
+                {formEstado === "sent" && formMensajeStatus && (
                   <span className="simulador__status" role="status">
-                    Abri tu cliente de correo para enviar el mensaje con tus datos.
+                    {formMensajeStatus}
                   </span>
                 )}
-                {formEstado === "error" && (
+                {formEstado === "error" && formMensajeStatus && (
                   <span className="simulador__status simulador__status--error" role="status">
-                    Completa los campos obligatorios antes de enviar.
+                    {formMensajeStatus}
                   </span>
                 )}
               </form>
