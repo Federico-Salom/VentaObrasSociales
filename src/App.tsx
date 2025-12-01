@@ -51,7 +51,7 @@ const obras: ObraSocial[] = [
     resumen:
       "Pensada para grupos familiares que buscan turnos rápidos y un seguimiento pediátrico cercano usando los mismos aportes.",
     beneficios: [
-      "Internaciones en cl�nicas aliadas",
+      "Internaciones en clínicas aliadas",
       "Plan materno infantil desde la semana 1",
       "Descuento de hasta el 100 % en farmacias adheridas",
     ],
@@ -84,7 +84,7 @@ const heroHighlights = [
   "Descuento de hasta el 100 % en farmacias adheridas",
 ]
 
-const heroStats = ["480+ altas activas en 2024", "72 h de respuesta promedio", "0 costo por trámite"]
+const heroStats = ["+480 altas activas en 2024", "-24 h de respuesta promedio", "0 costos por el trámite"]
 
 const TICKER_BASE_SPEED = 38
 
@@ -278,9 +278,9 @@ export default function App() {
                 </button>
               </div>
             </div>
-            <h1>Direcciona tus aportes laborales a Flex o ViaSano sin perder beneficios</h1>
+            <h1>Direccioná tus aportes laborales a Flex o ViaSano sin perder beneficios</h1>
             <p>
-              Soy {ASESOR_NOMBRE}, el nexo comercial de ambas obras sociales. Te acompaño paso a paso para que los aportes que ya figuran en tus recibos de sueldo se usen a tu favor, sin pagar doble ni pelearte con administración.
+              Soy {ASESOR_NOMBRE}, el nexo comercial de ambas obras sociales. Te acompaño paso a paso para que los aportes que ya figuran en tus recibos de sueldo se usen a tu favor, sin pagar doble ni pelearte con la administración.
             </p>
             <p className="hero__subcopy">
               Vas a tener tu aplicación para autogestionarte: turnos, recetas, autorizaciones, teleconsultas y citas programadas quedan en un mismo panel para que no dependas de terceros.
@@ -344,15 +344,17 @@ export default function App() {
           <div className="hero__form-column">
             <div className="hero__card">
               <div className="hero__card-head">
-                <a className="btn btn--secondary hero__card-cta" href="https://wa.me/5491171397320" target="_blank" rel="noreferrer">
-                  Hablar con el asesor
-                </a>
-                <h2>Diagnstico express</h2>
-                <p className="hero__card-subtitle">Envame tus datos basicos y te devuelvo un plan de accion para redirigir tus aportes.</p>
+                <div className="hero__card-row">
+                  <h2>Diagnóstico express</h2>
+                  <a className="btn btn--secondary hero__card-cta" href="https://wa.me/5491171397320" target="_blank" rel="noreferrer">
+                    Hablar con el asesor
+                  </a>
+                </div>
+                <p className="hero__card-subtitle">Enviame tus datos básicos y te devuelvo un plan de acción para redirigir tus aportes.</p>
               </div>
               <form className="simulador" onSubmit={handleDiagnostico}>
                 <label>
-                  NNmero de DNI/CUIL
+                  Número de DNI/CUIL
                   <input
                     type="text"
                     placeholder="Ej: 30-12345678-9"
@@ -362,7 +364,7 @@ export default function App() {
                   />
                 </label>
                 <label>
-                  Telfono de contacto
+                  Teléfono de contacto
                   <input
                     type="tel"
                     placeholder="Ej: 11 5555 5555"
@@ -383,7 +385,7 @@ export default function App() {
                   </select>
                 </label>
                 <label>
-                  Localidad donde residis
+                  Localidad donde residís
                   <input
                     type="text"
                     placeholder="Ej: Palermo, CABA"
@@ -396,7 +398,7 @@ export default function App() {
                   Mensaje
                   <textarea
                     rows={3}
-                    placeholder="Contame si tus familiares o si tenes otra cobertura"
+                    placeholder="Contame si tenés familiares o si tenés otra cobertura"
                     value={formData.mensaje}
                     onChange={handleChange("mensaje")}
                   />
@@ -404,7 +406,7 @@ export default function App() {
                 <button className="btn btn--primary" type="submit">
                   Enviar mis datos
                 </button>
-                <span className="simulador__disclaimer">Respondo por WhatsApp o correo en menos de un dia habil.</span>
+                <span className="simulador__disclaimer">Respondo por WhatsApp o correo en menos de un día hábil.</span>
                 {formEstado === "sent" && (
                   <span className="simulador__status" role="status">
                     Abri tu cliente de correo para enviar el mensaje con tus datos.
@@ -427,7 +429,7 @@ export default function App() {
             <p className="badge badge--soft">Respaldo real</p>
             <h2>Informes claros para vos y para recursos humanos</h2>
             <p className="section__description">
-              Cada paso queda documentado: actas de derivacion, autorizaciones digitales y seguimiento en SSSalud para que no quede nada librado al azar.
+              Cada paso queda documentado: actas de derivación, autorizaciones digitales y seguimiento en SSSalud para que no quede nada librado al azar.
             </p>
             <ul className="confidence__stats">
               {metricasConfianza.map((item) => (
@@ -444,9 +446,9 @@ export default function App() {
         <section id="obras" className="section">
           <div className="section__header">
             <p className="badge badge--soft">Flex y ViaSano</p>
-            <h2>Dos opciones, un solo asesor que pone tus aportes donde mas rinden</h2>
+            <h2>Dos opciones, un solo asesor que pone tus aportes donde más rinden</h2>
             <p className="section__description">
-              No vendo planes cerrados. Te cuento con claridad que cobertura ofrece cada obra social y chequeo que puedas entrar con lo que ya aportas en tus trabajos en blanco.
+              No vendo planes cerrados. Te cuento con claridad qué cobertura ofrece cada obra social y chequeo que puedas entrar con lo que ya aportás en tus trabajos en blanco.
             </p>
           </div>
           <div className="obras__grid">
@@ -552,4 +554,6 @@ export default function App() {
     </div>
   )
 }
+
+
 
