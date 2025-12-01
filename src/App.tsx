@@ -37,11 +37,11 @@ const obras: ObraSocial[] = [
     nombre: "Obra Social Flex",
     sello: "Aportes flexibles",
     resumen:
-      "Ideal para perfiles comerciales, tech y servicios que quieren sumar sanatorios privados sin dejar de estar en relacion de dependencia.",
+      "Ideal para perfiles comerciales, tech y servicios que quieren sumar sanatorios privados sin dejar de estar en relación de dependencia.",
     beneficios: [
-      "Derivacion de aportes inmediata y sin costo extra",
-      "Cartilla odontologica y oftalmologica completa",
-      "Descuento de hasta 100% en farmacias adheridas",
+      "Derivación de aportes inmediata y sin costo extra",
+      "Cartilla odontológica y oftalmológica completa",
+      "Descuento de hasta el 100 % en farmacias adheridas",
     ],
     enlace: "https://app.flexsalud.com.ar/",
   },
@@ -49,11 +49,11 @@ const obras: ObraSocial[] = [
     nombre: "ViaSano Salud",
     sello: "Cobertura familiar",
     resumen:
-      "Pensada para grupos familiares que buscan turnos rapidos y un seguimiento pediatrico cercano usando los mismos aportes.",
+      "Pensada para grupos familiares que buscan turnos rápidos y un seguimiento pediátrico cercano usando los mismos aportes.",
     beneficios: [
-      "Internaciones en clinicas aliadas",
-      "Plan materno infantil desde la semana uno",
-      "Descuento de hasta 100% en farmacias adheridas",
+      "Internaciones en cl�nicas aliadas",
+      "Plan materno infantil desde la semana 1",
+      "Descuento de hasta el 100 % en farmacias adheridas",
     ],
     enlace: "https://aplicacion-pwa.viasanosalud.com.ar/",
   },
@@ -62,60 +62,56 @@ const obras: ObraSocial[] = [
 const pasos: Paso[] = [
   {
     titulo: "1. Reviso tus recibos",
-    detalle: "Analizo tus ultimos dos recibos y verifico donde se estan acreditando los aportes que genera tu empleo.",
+    detalle: "Analizo tus últimos dos recibos y verifico dónde se están acreditando los aportes que genera tu empleo.",
   },
   {
     titulo: "2. Elegimos la obra",
-    detalle: "Te explico diferencia real entre Flex y ViaSano y definimos cual conviene segun zona, familia y uso esperado.",
+    detalle: "Te explico la diferencia real entre Flex y ViaSano y definimos cuál conviene según zona, familia y uso esperado.",
   },
   {
     titulo: "3. Seguimiento sin vueltas",
-    detalle: "Gestiono la adhesion, monitoreo la primera liquidacion y confirmo que ya estes activo para pedir turnos.",
+    detalle: "Gestiono la adhesión, monitoreo la primera liquidación y confirmo que ya estés activo para pedir turnos.",
   },
 ]
 
 const heroHighlights = [
-  "Atencion demanda espontanea sin turno previo",
-  "Telemedicina y cert. medico",
-  "Medico a domicilio dentro de AMBA",
+  "Atención demanda espontánea sin turno previo",
+  "Telemedicina y cert. médico",
+  "Médico a domicilio dentro de AMBA",
   "Guardias y sanatorios abiertos las 24 hs",
-  "Odontologia preventiva y tratamientos completos",
+  "Odontología preventiva y tratamientos completos",
   "Ortodoncia con brackets incluida",
-  "Descuento de hasta 100% en farmacias adheridas",
+  "Descuento de hasta el 100 % en farmacias adheridas",
 ]
 
-const heroStats = [
-  { valor: "480+", etiqueta: "altas activas en 2024" },
-  { valor: "72 h", etiqueta: "respuesta promedio" },
-  { valor: "0", etiqueta: "costos por tramitar" },
-]
+const heroStats = ["480+ altas activas en 2024", "72 h de respuesta promedio", "0 costo por trámite"]
 
 const TICKER_BASE_SPEED = 38
 
 const metricasConfianza: ConfianzaMetric[] = [
-  { valor: "12 a�os", etiqueta: "Gestionando aportes", detalle: "Experiencia en payroll y derivaciones para PyMEs" },
-  { valor: "98%", etiqueta: "Altas aprobadas", detalle: "Documentacion validada por las obras sociales" },
-  { valor: "RNOS vigente", etiqueta: "Respaldado", detalle: "Opero con matriculas actualizadas ante SSSalud" },
+  { valor: "12 años", etiqueta: "Gestionando aportes", detalle: "Experiencia en payroll y derivaciones para PyMEs" },
+  { valor: "98%", etiqueta: "Altas aprobadas", detalle: "Documentación validada por las obras sociales" },
+  { valor: "RNOS vigente", etiqueta: "Respaldado", detalle: "Opero con matrículas actualizadas ante SSSalud" },
 ]
 
 const testimonios: Testimonio[] = [
   {
     mensaje:
-      "En mi empresa nunca sabian donde iba mi aporte. Lucas Dinapoli me paso un informe para RR. HH. y en dos semanas ya estaba con Flex con toda la cartilla digital.",
+      "En mi empresa nunca sabían dónde iba mi aporte. Lucas Dinapoli me pasó un informe para RR. HH. y en dos semanas ya estaba con Flex con toda la cartilla digital.",
     nombre: "Lucia Pereyra",
     rol: "Marketing en fintech",
     resultado: "Derivacion aprobada en 11 dias habiles",
   },
   {
     mensaje:
-      "Necesitabamos sumar a nuestro bebe y ViaSano nos dio obstetricia completa. Nos guiaron en cada firma y no pagamos nada extra.",
+      "Necesitábamos sumar a nuestro bebé y ViaSano nos dio obstetricia completa. Nos guiaron en cada firma y no pagamos nada extra.",
     nombre: "Familia Rivas",
     rol: "Docencia y retail",
     resultado: "Grupo familiar activo con ViaSano",
   },
   {
     mensaje:
-      "Trabajo en dos empresas y pude unificar los aportes para alcanzar el plan corporativo de ViaSano. Toda la gestion fue online.",
+      "Trabajo en dos empresas y pude unificar los aportes para alcanzar el plan corporativo de ViaSano. Toda la gestión fue online.",
     nombre: "Gaston Ibanez",
     rol: "Lider de soporte IT",
     resultado: "Upgrade de plan sin costo adicional",
@@ -124,20 +120,20 @@ const testimonios: Testimonio[] = [
 
 const faqs: FAQ[] = [
   {
-    pregunta: "Tengo mas de un empleo, puedo usar todos los aportes?",
-    respuesta: "Si, sumo los aportes de cada recibo en un mismo legajo para que tengas mejor categoria sin pagar diferencias.",
+    pregunta: "¿Tengo más de un empleo, puedo usar todos los aportes?",
+    respuesta: "Sí, sumo los aportes de cada recibo en un mismo legajo para que tengas mejor categoría sin pagar diferencias.",
   },
   {
-    pregunta: "Cuanto tarda el tramite completo?",
-    respuesta: "Entre 10 y 15 dias habiles segun la empresa. Te aviso cuando la obra social confirma el alta y te envio la credencial digital.",
+    pregunta: "¿Cuánto tarda el trámite completo?",
+    respuesta: "Entre 10 y 15 días hábiles según la empresa. Te aviso cuando la obra social confirma el alta y te envío la credencial digital.",
   },
   {
-    pregunta: "Hay costos ocultos o clausulas raras?",
-    respuesta: "No cobro honorarios por el tramite. Solo trabajamos con los aportes que ya te descuentan por ley y firmamos la autorizacion digital.",
+    pregunta: "¿Hay costos ocultos o cláusulas raras?",
+    respuesta: "No cobro honorarios por el trámite. Solo trabajamos con los aportes que ya te descuentan por ley y firmamos la autorización digital.",
   },
   {
-    pregunta: "Puedo volver a mi obra social anterior si no me convence?",
-    respuesta: "Si. Toda derivacion se asienta en SSSalud y podes revertirla luego de los plazos legales. Te explico el procedimiento antes de firmar.",
+    pregunta: "¿Puedo volver a mi obra social anterior si no me convence?",
+    respuesta: "Sí. Toda derivación se asienta en SSSalud y podés revertirla luego de los plazos legales. Te explico el procedimiento antes de firmar.",
   },
 ]
 
@@ -191,7 +187,7 @@ export default function App() {
     const handlePointerMove = (event: PointerEvent) => {
       if (!tickerDraggingRef.current || !tickerRef.current) return
       const list = tickerRef.current
-      const wrapWidth = list.scrollWidth ? list.scrollWidth / 2 : 0
+      const wrapWidth = list?.scrollWidth ? list.scrollWidth / 2 : 0
       if (!wrapWidth) return
       const delta = event.clientX - tickerDragLastXRef.current
       tickerDragLastXRef.current = event.clientX
@@ -228,7 +224,7 @@ export default function App() {
     }
 
     const subject = encodeURIComponent("Nueva solicitud de diagnostico express")
-    const cuerpo = `DNI/CUIL${formData.dni}\nTelefono: ${formData.telefono}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
+    const cuerpo = `DNI/CUIL ${formData.dni}\nTelefono: ${formData.telefono}\nPreferencia de obra social: ${formData.preferencia}\nLocalidad: ${formData.localidad}\nMensaje adicional: ${formData.mensaje || "Sin comentarios"}`
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(cuerpo)}`
     setFormEstado("sent")
   }
@@ -246,51 +242,48 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
-        <nav className="hero__nav" aria-label="Navegacion principal">
-          <div className="nav__cta">
-            <button
-              type="button"
-              className={`nav__burger ${isNavOpen ? "is-open" : ""}`}
-              aria-label="Abrir men� de navegaci�n"
-              onClick={() => setIsNavOpen((prev) => !prev)}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
-            <div className={`nav__mobile ${isNavOpen ? "is-open" : ""}`} role="menu">
-              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#proceso")}>
-                Proceso
-              </button>
-              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#casos")}>
-                Casos
-              </button>
-              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#faq")}>
-                Preguntas
-              </button>
-              <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#contacto")}>
-                Contacto
-              </button>
-            </div>
-          </div>
-        </nav>
-
         <div className="hero__grid">
           <div className="hero__copy">
             <div className="hero__title-row">
               <h2 className="hero__title-text">Aportes Flex &amp; ViaSano</h2>
-              <div className="nav__links nav__links--hero">
-                <a href="#proceso">Proceso</a>
-                <a href="#casos">Casos</a>
-                <a href="#faq">Preguntas</a>
+              <div className="hero__title-actions">
+                <div className="nav__links nav__links--hero">
+                  <a href="#proceso">Proceso</a>
+                  <a href="#casos">Casos</a>
+                  <a href="#faq">Preguntas</a>
+                </div>
+                <button
+                  type="button"
+                  className={`nav__burger ${isNavOpen ? "is-open" : ""}`}
+                  aria-label="Abrir menu de navegacion"
+                  onClick={() => setIsNavOpen((prev) => !prev)}
+                >
+                  <span />
+                  <span />
+                  <span />
+                </button>
+              </div>
+              <div className={`nav__mobile ${isNavOpen ? "is-open" : ""}`} role="menu">
+                <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#proceso")}>
+                  Proceso
+                </button>
+                <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#casos")}>
+                  Casos
+                </button>
+                <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#faq")}>
+                  Preguntas
+                </button>
+                <button type="button" className="nav__mobile-link" onClick={() => handleNavNavigate("#contacto")}>
+                  Contacto
+                </button>
               </div>
             </div>
             <h1>Direcciona tus aportes laborales a Flex o ViaSano sin perder beneficios</h1>
             <p>
-              Soy {ASESOR_NOMBRE}, el nexo comercial de ambas obras sociales. Te acompa�o paso a paso para que los aportes que ya figuran en tus recibos de sueldo se usen a tu favor, sin pagar doble ni pelearte con administraci�n.
+              Soy {ASESOR_NOMBRE}, el nexo comercial de ambas obras sociales. Te acompaño paso a paso para que los aportes que ya figuran en tus recibos de sueldo se usen a tu favor, sin pagar doble ni pelearte con administración.
             </p>
             <p className="hero__subcopy">
-              Vas a tener tu aplicacion para autogestionarte: turnos, recetas, autorizaciones, teleconsultas y citas programadas quedan en un mismo panel para que no dependas de terceros.
+              Vas a tener tu aplicación para autogestionarte: turnos, recetas, autorizaciones, teleconsultas y citas programadas quedan en un mismo panel para que no dependas de terceros.
             </p>
             <div className="hero__highlights-wrap">
               <ul
@@ -312,9 +305,9 @@ export default function App() {
                   tickerRef.current.setPointerCapture(event.pointerId)
                 }}
                 onPointerUp={(event) => {
-                  tickerDraggingRef.current = false
-                  tickerTargetSpeedRef.current = TICKER_BASE_SPEED
-                  tickerRef.current?.releasePointerCapture(event.pointerId)
+                tickerDraggingRef.current = false
+                tickerTargetSpeedRef.current = TICKER_BASE_SPEED
+                tickerRef.current?.releasePointerCapture(event.pointerId)
                 }}
                 onPointerLeave={() => {
                   if (tickerDraggingRef.current) return
@@ -328,13 +321,12 @@ export default function App() {
                 ))}
               </ul>
             </div>
-            <span className="badge badge--floating">Asesoria personalizada para trabajadores en blanco</span>
+            <span className="badge badge--floating">Asesoría personalizada para trabajadores en blanco</span>
             <div className="hero__cta-row hero__cta-row--compact">
               <ul className="hero__stats">
                 {heroStats.map((stat) => (
-                  <li key={stat.etiqueta}>
-                    <strong>{stat.valor}</strong>
-                    <span>{stat.etiqueta}</span>
+                  <li key={stat}>
+                    <h3 className="hero__stat-text">{stat}</h3>
                   </li>
                 ))}
               </ul>
@@ -352,15 +344,15 @@ export default function App() {
           <div className="hero__form-column">
             <div className="hero__card">
               <div className="hero__card-head">
-                <h2>Diagnostico express</h2>
                 <a className="btn btn--secondary hero__card-cta" href="https://wa.me/5491171397320" target="_blank" rel="noreferrer">
                   Hablar con el asesor
                 </a>
-                <p className="hero__card-subtitle">Enviame tus datos basicos y te devuelvo un plan de accion para redirigir tus aportes.</p>
+                <h2>Diagnstico express</h2>
+                <p className="hero__card-subtitle">Envame tus datos basicos y te devuelvo un plan de accion para redirigir tus aportes.</p>
               </div>
               <form className="simulador" onSubmit={handleDiagnostico}>
                 <label>
-                  Numero de DNI/CUIL
+                  NNmero de DNI/CUIL
                   <input
                     type="text"
                     placeholder="Ej: 30-12345678-9"
@@ -370,7 +362,7 @@ export default function App() {
                   />
                 </label>
                 <label>
-                  Telefono de contacto
+                  Telfono de contacto
                   <input
                     type="tel"
                     placeholder="Ej: 11 5555 5555"
@@ -387,7 +379,7 @@ export default function App() {
                     </option>
                     <option>Quiero Flex</option>
                     <option>Quiero ViaSano</option>
-                    <option>Necesito que me recomiendes</option>
+                    <option>Necesito que me recomiedndes</option>
                   </select>
                 </label>
                 <label>
@@ -404,7 +396,7 @@ export default function App() {
                   Mensaje
                   <textarea
                     rows={3}
-                    placeholder="Contame si sumas familiares o si tenes otra cobertura"
+                    placeholder="Contame si tus familiares o si tenes otra cobertura"
                     value={formData.mensaje}
                     onChange={handleChange("mensaje")}
                   />
@@ -479,7 +471,7 @@ export default function App() {
         <section id="proceso" className="section section--alt">
           <div className="section__header">
             <p className="badge badge--soft">Proceso</p>
-            <h2>Asi aprovechas tus aportes sin pelearte con recursos humanos</h2>
+            <h2>Así aprovechás tus aportes sin pelearte con recursos humanos</h2>
           </div>
           <div className="pasos__grid">
             {pasos.map((paso, index) => (
@@ -494,12 +486,12 @@ export default function App() {
         <section className="section section--stories" id="casos">
           <div className="section__header">
             <p className="badge badge--soft">Casos</p>
-            <h2>Historias de personas que ya redirigieron sus aportes</h2>
+            <h2>Historias de personas que ya redirigieron tus aportes</h2>
           </div>
           <div className="testimonios">
             {testimonios.map((testimonio, index) => (
               <article className={`testimonio-card reveal delay-${index}`} data-reveal key={testimonio.nombre}>
-                <p className="testimonio-card__mensaje">�{testimonio.mensaje}�</p>
+                <p className="testimonio-card__mensaje">{testimonio.mensaje}</p>
                 <div className="testimonio-card__footer">
                   <div>
                     <strong>{testimonio.nombre}</strong>
@@ -515,7 +507,7 @@ export default function App() {
         <section className="section" id="faq">
           <div className="section__header">
             <p className="badge badge--soft">Preguntas frecuentes</p>
-            <h2>Lo que mas me consultan antes de derivar aportes</h2>
+            <h2>Lo que más me consultan antes de derivar aportes</h2>
           </div>
           <div className="faq">
             {faqs.map((faq, index) => (
@@ -531,13 +523,13 @@ export default function App() {
           <div className="cta__panel">
             <div>
               <p className="badge badge--soft">Contacto directo</p>
-              <h2>Coordina ahora mismo tu derivacion de aportes</h2>
+              <h2>Coordina ahora mismo tu derivación de aportes</h2>
               <p>
-                Trabajo con Flex y ViaSano a nivel nacional. Enviame tus recibos y en el mismo dia confirmo si aplicas y cuando estarias activo.
+                Trabajo con Flex y ViaSano a nivel nacional. Enviame tus recibos y en el mismo día te confirmo si aplicás y cuándo estarías activo.
               </p>
-              <ul className="contacto__notes">
+              <ul className="contacto__notenes">
                 <li>Seguimiento por WhatsApp y correo</li>
-                <li>Documentacion firmada digitalmente</li>
+                <li>Documentación firmada digitalmente</li>
                 <li>Sin costos ocultos ni letras chicas</li>
               </ul>
             </div>
@@ -560,3 +552,4 @@ export default function App() {
     </div>
   )
 }
+
