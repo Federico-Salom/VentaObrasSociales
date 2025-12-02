@@ -455,8 +455,8 @@ export default function App() {
                   />
                 </label>
                 {formErrors.mensaje && <span className="field-error">{formErrors.mensaje}</span>}
-                <button className="btn btn--primary" type="submit">
-                  Enviar mis datos
+                <button className="btn btn--primary" type="submit" disabled={formEnviando}>
+                  {formEnviando ? "Enviando..." : "Enviar mis datos"}
                 </button>
                 <span className="simulador__disclaimer">Respondo por WhatsApp o correo en menos de un día hábil.</span>
                 {formEstado === "sent" && formMensajeStatus && (
