@@ -152,7 +152,7 @@ const reportLeadConversion = () => {
   const gtag = window.gtag
   if (typeof gtag !== "function") return
   gtag("event", "conversion", {
-    send_to: "AW-17762222708/lujeC0_0wccbPSE2JVC",
+    send_to: "AW-17762222708/mbgZCNGK-sobEPSE2JVC",
     value: 1.0,
     currency: "ARS",
   })
