@@ -141,6 +141,23 @@ const CONTACT_EMAIL = "federicosalom@proton.me"
 const ASESOR_NOMBRE = "Lucas Dinapoli"
 const API_LEAD_URL = (import.meta as any).env?.VITE_API_LEAD_URL || "/api/lead"
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
+
+const reportLeadConversion = () => {
+  if (typeof window === "undefined") return
+  const gtag = window.gtag
+  if (typeof gtag !== "function") return
+  gtag("event", "conversion", {
+    send_to: "AW-17762222708/lujeC0_0wccbPSE2JVC",
+    value: 1.0,
+    currency: "ARS",
+  })
+}
+
 export default function App() {
   const [formData, setFormData] = useState({ dni: "", telefono: "", preferencia: "", localidad: "", mensaje: "" })
   const [formEstado, setFormEstado] = useState<"idle" | "sent" | "error">("idle")
@@ -261,6 +278,7 @@ export default function App() {
       if (!resp.ok) throw new Error(`Error API: ${resp.status}`)
       setFormEstado("sent")
       setFormMensajeStatus("Recibimos tus datos. Te contactamos en breve.")
+      reportLeadConversion()
     } catch (error) {
       console.error(error)
       setFormEstado("error")
